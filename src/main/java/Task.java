@@ -14,9 +14,9 @@ public class Task extends Thread{
         if(new File("./video").mkdirs()){
             file = new File("./video");
         }
-        ProcessBuilder processBuilder = new ProcessBuilder("/Users/liuzeyu/Documents/JavaProject/cs622/shell.sh",url);
+        ProcessBuilder processBuilder = new ProcessBuilder("/Users/liuzeyu/Documents/JavaProject/cs622/src/main/recources/shell.sh",url);
         try {
-            processBuilder.directory(file);
+//            processBuilder.directory(file);
             System.out.println("Processing Task: "+number);
             Process process = processBuilder.start();
             process.waitFor();

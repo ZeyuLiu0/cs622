@@ -3,6 +3,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -14,16 +16,31 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException, IOException, YoutubeDLException {
-        List<String> urls = getUrls("dead lift");
+        String keyword = args[0];
+        List<String> urls = getUrls(keyword);
 
-        for(int i =0; i< 1;i++){
+        for(int i =0; i< 10;i++){
             Task task = new Task(urls.get(i),i);
             task.start();
+            task.join();
         }
-//        String directory = System.getProperty("./");
-//        YoutubeDLRequest request = new YoutubeDLRequest("https://www.youtube.com/watch?v=QY8dhl1EQfI", directory);
-//        YoutubeDLResponse response = YoutubeDL.execute(request);
-//        String stdOut = response.getOut();
+        split();
+    }
+
+    public static void split(){
+        File file = new File("./video");
+        String[] content = file.list();
+        try{
+            assert content!=null;
+            for(String s : content){
+                ProcessBuilder processBuilder = new ProcessBuilder("/Users/liuzeyu/Documents/JavaProject/cs622/src/main/recources/split.sh",s);
+                processBuilder.directory(file);
+                Process process = processBuilder.start();
+                process.waitFor();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static List<String> getUrls(String keyWord) throws InterruptedException {
@@ -32,7 +49,7 @@ public class Main {
         driver.get("https://www.youtube.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         WebElement search = driver.findElement(By.xpath("//input[@id='search']"));
-        search.sendKeys("dead lift");
+        search.sendKeys(keyWord);
         driver.findElement(By.id("search-icon-legacy")).click();
         Thread.sleep(5000);
         List<WebElement> videos = driver.findElements(By.xpath("//ytd-video-renderer/div[1]/ytd-thumbnail[1]/a"));
@@ -42,5 +59,4 @@ public class Main {
         driver.quit();
         return output;
     }
-
 }

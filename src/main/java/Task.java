@@ -4,19 +4,21 @@ import java.io.IOException;
 public class Task extends Thread{
     private final String url;
     private final int number;
-    public Task(String url, int number){
+
+    private final String fileName;
+    public Task(String url, int number, String fileName){
         this.url = url;
         this.number = number;
+        this.fileName = fileName;
     }
     @Override
     public void run(){
         File file = null;
-        if(new File("./video").mkdirs()){
-            file = new File("./video");
+        if(new File("./"+fileName).mkdirs()){
+            file = new File("./"+fileName);
         }
         ProcessBuilder processBuilder = new ProcessBuilder("/Users/liuzeyu/Documents/JavaProject/cs622/src/main/recources/shell.sh",url);
         try {
-//            processBuilder.directory(file);
             System.out.println("Processing Task: "+number);
             Process process = processBuilder.start();
             process.waitFor();

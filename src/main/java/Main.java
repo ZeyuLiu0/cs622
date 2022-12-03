@@ -17,18 +17,12 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException, IOException, YoutubeDLException {
         String keyword = args[0];
-        List<String> urls = getUrls(keyword);
+        dealWithYB(keyword);
 
-        for(int i =0; i< 10;i++){
-            Task task = new Task(urls.get(i),i);
-            task.start();
-            task.join();
-        }
-        split();
     }
 
-    public static void split(){
-        File file = new File("./video");
+    public static void split(String fileName){
+        File file = new File("./"+fileName);
         String[] content = file.list();
         try{
             assert content!=null;
@@ -43,7 +37,7 @@ public class Main {
         }
     }
 
-    public static List<String> getUrls(String keyWord) throws InterruptedException {
+    public static List<String> getUrlsFromYB(String keyWord)   {
         List<String> output = new ArrayList<>();
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.youtube.com/");
@@ -51,7 +45,6 @@ public class Main {
         WebElement search = driver.findElement(By.xpath("//input[@id='search']"));
         search.sendKeys(keyWord);
         driver.findElement(By.id("search-icon-legacy")).click();
-        Thread.sleep(5000);
         List<WebElement> videos = driver.findElements(By.xpath("//ytd-video-renderer/div[1]/ytd-thumbnail[1]/a"));
         for(WebElement e : videos){
             output.add(e.getAttribute("href"));
@@ -59,4 +52,15 @@ public class Main {
         driver.quit();
         return output;
     }
+
+    public static void dealWithYB(String keyword){
+        List<String> urls = getUrlsFromYB(keyword);
+
+        for(int i =0; i< 10;i++){
+            Task task = new Task(urls.get(i),i, "youtube");
+            task.start();
+        }
+        split(keyword);
+    }
+
 }

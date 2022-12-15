@@ -1,2 +1,2 @@
 # cs622
-Automate youtube Video Downloading Script, using Selenium, youtube-dlp.
+Automate youtube/Instagram/Tiktok Video Downloading tool, using Selenium, youtube-dlp

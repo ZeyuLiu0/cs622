@@ -5,14 +5,49 @@
     <title>Title</title>
 </head>
 <body>
-<form action="http://localhost:2000/get" method="get">
-    <label>Enter Key word
+
+<p>Content from youtube:</p>
+<form action="http://localhost:2000/getyoutube" method="get">
+    <label>Enter Key word to download from youtube
         <input id="text" name="content">
     </label>
-    <button id="button">Click</button>
+    <button id="buttonuyb">Click</button>
+</form>
+
+<div>.</div>
+<div>.</div>
+<div>------------------------------------------------------------------------------</div>
+<div>.</div>
+<div>.</div>
+
+<p>Content from Instagram:</p>
+<form action="http://localhost:2000/getig" method="get">
+    <label for="user"> Enter your username for instagram</label><input id="user" name="user">
+    <div></div>
+    <label for="password">Enter your password</label><input type="password" id="password" name="password">
+    <div></div>
+    <label>Enter Key word to download from IG
+        <input id="key" name="content">
+    </label>
+    <div></div>
+    <button id="buttonig">Click</button>
+</form>
+<div>.</div>
+<div>.</div>
+<div>------------------------------------------------------------------------------</div>
+<div>.</div>
+<div>.</div>
+<p>Content from TikTok : </p>
+<form action="http://localhost:2000/gettiktok" method="get">
+    <label>Enter Key word to download from Tiktok
+        <input id="keyforTT" name="content">
+    </label>
+    <div></div>
+    <button id="buttonTT">Click</button>
 </form>
 
 <a href="/Users/liuzeyu/Documents/JavaProject/cs622/video">Video</a>
+<a href="/Users/liuzeyu/Downloads">TikToC</a>
     <script src="logic.js"></script>
 
 </body>

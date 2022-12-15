@@ -1,2 +1,2 @@
 #!/bin/bash
-yt-dlp "$1" -o "video/%(title)s.%(ext)s"
+yt-dlp "$1" -o "./video/$2/%(title)s.%(ext)s"

@@ -13,11 +13,7 @@ public class Task extends Thread{
     }
     @Override
     public void run(){
-        File file = null;
-        if(new File("./"+fileName).mkdirs()){
-            file = new File("./"+fileName);
-        }
-        ProcessBuilder processBuilder = new ProcessBuilder("/Users/liuzeyu/Documents/JavaProject/cs622/src/main/recources/shell.sh",url);
+        ProcessBuilder processBuilder = new ProcessBuilder("/Users/liuzeyu/Documents/JavaProject/cs622/src/main/recources/shell.sh",url,fileName);
         try {
             System.out.println("Processing Task: "+number);
             Process process = processBuilder.start();
